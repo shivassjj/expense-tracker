@@ -1,0 +1,21 @@
+# Build output — собирается внутри Docker (multi-stage), локальный target не нужен
+target/
+
+# IDE
+.idea/
+*.iml
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker-файлы — сам образ их не собирает, в контекст слать незачем
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Прочее
+HELP.md
+*.log
+.DS_Store

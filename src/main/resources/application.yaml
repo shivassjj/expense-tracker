@@ -3,9 +3,9 @@ spring:
     name: expense-tracker
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/expense_tracker
-    username: ${SPRING_DATASOURCE_USERNAME:expense
-    password: ${SPRING_DATASOURCE_PASSWORD:expense
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/expense_tracker}
+    username: ${SPRING_DATASOURCE_USERNAME:expense}
+    password: ${SPRING_DATASOURCE_PASSWORD:expense}
 
   jpa:
     open-in-view: false

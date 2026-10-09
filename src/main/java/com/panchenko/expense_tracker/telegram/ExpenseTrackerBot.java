@@ -26,6 +26,12 @@ public class ExpenseTrackerBot extends DefaultLongPollingUpdateConsumer {
 
     @Override
     public void consume(Update update) {
+
+        if (update.hasCallbackQuery()) {
+            handleCallback(update);
+            return;
+        }
+
         if (!update.hasMessage() || !update.getMessage().hasText()) {
             return;
         }
@@ -33,7 +39,8 @@ public class ExpenseTrackerBot extends DefaultLongPollingUpdateConsumer {
         var message = update.getMessage();
         var telegramUser = message.getFrom();
 
-        log.info("Получено сообщение: updateId={}, chatId={}, text={}", update.getUpdateId(), message.getChat().getId(), message.getText());
+        log.info("Получено сообщение: updateId={}, chatId={}, text={}",
+                update.getUpdateId(), message.getChat().getId(), message.getText());
 
         if ("/start".equals(message.getText())) {
             Long telegramId = telegramUser.getId();
@@ -57,6 +64,10 @@ public class ExpenseTrackerBot extends DefaultLongPollingUpdateConsumer {
 
             sendText(message.getChat().getId(), availableCategories.toString());
         }
+    }
+
+    private void handleCallback(Update update) {
+
     }
 
     private void sendText(Long chatId, String text) {

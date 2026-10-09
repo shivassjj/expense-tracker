@@ -1,6 +1,7 @@
 package com.panchenko.expense_tracker.expense;
 
 import com.panchenko.expense_tracker.category.Category;
+import com.panchenko.expense_tracker.currency.CurrencyCode;
 import com.panchenko.expense_tracker.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class Expense {
     private BigDecimal amount;
 
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 3)
+    private CurrencyCode currency;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)

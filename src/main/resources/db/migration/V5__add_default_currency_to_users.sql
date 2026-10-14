@@ -1,0 +1,2 @@
+ALTER TABLE users
+    ADD COLUMN default_currency VARCHAR(3);

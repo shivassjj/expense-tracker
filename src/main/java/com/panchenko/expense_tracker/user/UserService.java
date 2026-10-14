@@ -1,5 +1,7 @@
 package com.panchenko.expense_tracker.user;
 
+import com.panchenko.expense_tracker.currency.CurrencyCode;
+import com.panchenko.expense_tracker.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +22,20 @@ public class UserService {
                     user.setUsername(username);
                     return userRepository.save(user);
                 });
+    }
+
+    @Transactional
+    public User setDefaultCurrency(Long telegramId, CurrencyCode currencyCode) {
+        if (telegramId == null || currencyCode == null) {
+            throw new IllegalArgumentException("Telegram ID and currency must not be null.");
+        }
+
+        User user = userRepository.findByTelegramId(telegramId)
+                .orElseThrow(() -> new UserNotFoundException(
+                        "Пользователь с id " + telegramId + " не найден"
+                ));
+
+        user.setDefaultCurrency(currencyCode);
+        return user;
     }
 }

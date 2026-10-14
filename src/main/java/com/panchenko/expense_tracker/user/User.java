@@ -1,5 +1,6 @@
 package com.panchenko.expense_tracker.user;
 
+import com.panchenko.expense_tracker.currency.CurrencyCode;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,10 @@ public class User {
 
     @Column(length = 32)
     private String username;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "default_currency")
+    private CurrencyCode defaultCurrency;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
